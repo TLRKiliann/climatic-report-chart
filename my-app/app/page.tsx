@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -61,12 +61,12 @@ export default function App() {
   const labels: string[] = ["janvier", "février", "mars", "avril", "mai", "juin", 
     "juillet", "aout", "septembre", "octobre", "novembre", "decembre"];
 
-  const data: DataProps = {
+  const dataTruck: DataProps = {
     labels,
     datasets: [
       {
         label: 'T°C 2010',
-        data: [-3, -1, 2, 9, 10, 16, 20, 17, 13, 8, 3, -2],
+        data: [-3, -1, 2, 9, 10, 16, 20, 17, 13, 8, 3, ],
         borderColor: 'rgb(53, 162, 235)',
         backgroundColor: 'rgba(53, 162, 235, 0.5)',
       },
@@ -84,20 +84,54 @@ export default function App() {
       },
     ],
   };
+
+  const [dataLoad, setDataLoad] = useState<number[][]>([
+      dataTruck.datasets[0].data,
+      dataTruck.datasets[1].data,
+      dataTruck.datasets[2].data,
+    ]
+  );
+
+  const [dataInsert, setDataInsert] = useState<string>("")
+
+  const handleChangeData = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setDataInsert(event?.target.value)
+  };
+
+  const handleClickData = () => {
+    //const mapping: number[] = dataLoad[0].concat(Number(dataInsert));
+    const mappData = dataLoad.map((d) => d === dataTruck.datasets[0].data ? {...d, dataInsert}: d);
+    console.log(mappData, "mapping");
+    setDataLoad(mappData);
+  };
+
   return (
       <main className='w-full h-screen bg-slate-50'>
         
         <h1 className='text-3xl font-bold text-center pt-10 pb-14 text-slate-600'>
           ChartJS
         </h1>
+      
+        <div className='relative flex w-3/5 h-auto m-auto'>
+          <Line ref={(reference) => reference} options={options} data={dataTruck} 
+            className='absolute w-3/5 max-w-3/5 bg-slate-100/50 py-1 rounded-lg shadow-md'/>
+        </div>
+      
+        <div className="relative w-full h-auto mt-[400px] border-2">
+          <input type="text" value={dataInsert} onChange={(e) => handleChangeData(e)} 
+            className='text-slate-100 bg-slate-800'
+          />
+          <button type="button" onClick={handleClickData}
+            className='text-slate-100 bg-slate-600 px-4 py-2 rounded'
+          >
+            Enter
+          </button>
+        </div>
 
-        <div className='flex items-center justify-center'>
-          
-          <div className='relative flex w-3/5 h-auto m-auto'>
-            <Line options={options} data={data} 
-              className='absolute w-3/5 max-w-3/5 bg-slate-100/50 py-1 rounded-lg shadow-md'/>
-          </div>
-
+        <div>
+          <p className='text-slate-900'>
+            {dataLoad}
+          </p>
         </div>
 
       </main>
