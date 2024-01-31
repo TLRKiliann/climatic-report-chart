@@ -2,9 +2,11 @@ import Link from 'next/link';
 
 export default function App() {
   return (
-    <main>
+    <main className='flex flex-col'>
       
-      <Link href="/graph">Graph</Link>
+      <Link href="/graph/linechart">LineChart</Link>
+
+      <Link href="/graph/barchart">BarChart</Link>
     
     </main>
   )
