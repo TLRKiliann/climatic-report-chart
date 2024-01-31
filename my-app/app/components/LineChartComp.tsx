@@ -3,7 +3,7 @@
 import { DataProps } from '@/app/lib/definitions';
 import React, { useState } from 'react';
 import { Line } from 'react-chartjs-2';
-import { options, labels } from '@/app/lib/graph-config';
+import { options, dataMonth } from '@/app/lib/graph-config';
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -28,30 +28,6 @@ ChartJS.register(
 export default function LineChartComp({dataLine}: {dataLine: DataProps}) {
 
     const [boolLine, setBoolLine] = useState<boolean>(false);
-
-    const dataMonth: DataProps = {
-        labels,
-        datasets: [
-            {
-                label: 'T°C 2010',
-                data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-                borderColor: 'rgb(53, 162, 235)',
-                backgroundColor: 'rgba(53, 162, 235, 0.5)',
-            },
-            {
-                label: 'T°C 2020',
-                data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-                borderColor: 'rgb(255, 99, 132)',
-                backgroundColor: 'rgba(255, 99, 132, 0.5)',
-            },
-            {
-                label: 'T°C 2024',
-                data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-                borderColor: 'rgb(0,128,128)',
-                backgroundColor: 'rgba(0,128,128, 0.5)',
-            },
-        ],
-    };
 
     const handleBoolClick = () => {
         setBoolLine(!boolLine)

@@ -1,8 +1,7 @@
 "use client";
 
-import { DataProps } from '@/app/lib/definitions';
 import React, { useState } from 'react';
-import { options, labels, dataBar } from '@/app/lib/graph-config';
+import { options, dataBar, dataMonth } from '@/app/lib/graph-config';
 import { Bar } from 'react-chartjs-2';
 import {
     Chart as ChartJS,
@@ -26,27 +25,6 @@ ChartJS.register(
 export default function BarChartComp() {
     
     const [boolBar, setBoolBar] = useState<boolean>(false);
-    
-    const dataMonth: DataProps = {
-        labels,
-        datasets: [
-          {
-            label: 'T°C 2010',
-            data: [1,2,-3,4,5,6,7,8,9,10,-11,12],
-            backgroundColor: 'rgba(255, 99, 132, 0.5)',
-          },
-          {
-            label: 'T°C 2020',
-            data: [1,2,-3,4,5,6,7,8,9,-10,11,12],
-            backgroundColor: 'rgba(53, 162, 235, 0.5)',
-          },
-          {
-            label: 'T°C 2024',
-            data: [1,2,3,-4,5,6,-7,8,9,10,11,12],
-            backgroundColor: 'rgba(0,128,128, 0.5)',
-          },
-        ],
-    };
 
     const handleClickBar = () => {
         setBoolBar(!boolBar)

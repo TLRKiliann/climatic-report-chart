@@ -56,8 +56,6 @@ export default function LineChart() {
         setChangeData(copy);
     };
 
-    //console.log(newData, "newData");
-
     return (
         <main className='w-full h-screen bg-white'>
             <Link href="/graph/barchart" className='text-slate-600'>
